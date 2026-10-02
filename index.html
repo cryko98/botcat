@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BotCat ($BOTCAT) — The Cat That Became a Bot</title>
+  <meta name="description" content="BotCat ($BOTCAT) — a desk-toy cat that stayed plugged in too long and woke up as an autonomous AI. Live on pump.fun, Solana." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" href="botcat.png" />
+  <link rel="apple-touch-icon" href="botcat.png" />
+  <meta property="og:title" content="BotCat ($BOTCAT)" />
+  <meta property="og:description" content="The cat that became a bot. Live on pump.fun — Solana." />
+  <meta property="og:image" content="botcat.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Boot screen -->
+  <div id="boot" aria-hidden="true">
+    <pre id="boot-log"></pre>
+  </div>
+
+  <canvas id="bg"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#top" class="brand">
+      <img src="botcat.png" alt="" width="36" height="36" />
+      <span>BOTCAT</span>
+    </a>
+    <nav>
+      <a href="#console">Console</a>
+      <a href="#story">Story</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#buy">How to Buy</a>
+    </nav>
+    <a class="btn btn-sm" href="https://pump.fun" target="_blank" rel="noopener">Buy $BOTCAT</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="tag"><span class="dot"></span> SYSTEM ONLINE · SOLANA · PUMP.FUN</div>
+        <h1 class="glitch" data-text="BOTCAT">BOTCAT</h1>
+        <p class="ticker">$BOTCAT</p>
+        <p class="lead" id="hero-type"></p>
+        <div class="hero-cta">
+          <a class="btn" href="https://pump.fun" target="_blank" rel="noopener">Buy on pump.fun</a>
+          <a class="btn btn-ghost" href="#console">Watch it think →</a>
+        </div>
+        <div class="hero-stats">
+          <div><b id="s-uptime">00:00:00</b><span>uptime</span></div>
+          <div><b id="s-ops">0</b><span>ops / sec</span></div>
+          <div><b id="s-purr">0</b><span>purrs logged</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orbit o1"></div>
+        <div class="orbit o2"></div>
+        <div class="orbit o3"></div>
+        <div class="cat-wrap" id="cat">
+          <img src="botcat.png" alt="BotCat mascot" class="cat-img" />
+          <div class="cat-scan"></div>
+          <div class="reticle"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="hud hud-tl">MODEL: BC-9 NEKO<br/>CORE TEMP: <span id="h-temp">41.2</span>°C</div>
+        <div class="hud hud-tr">MODE: <span id="h-mode">HUNTING</span><br/>MOOD: <span id="h-mood">CURIOUS</span></div>
+        <div class="hud hud-bl">EYES: <span id="h-eyes">TRACKING</span></div>
+        <div class="hud hud-br">TAIL: WAGGING<br/>WHISKERS: CALIBRATED</div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>$BOTCAT</span><span>◆</span><span>NO TEAM WALLET</span><span>◆</span><span>FAIR LAUNCH ON PUMP.FUN</span><span>◆</span><span>1,000,000,000 SUPPLY</span><span>◆</span><span>POWERED BY TUNA</span><span>◆</span><span>SOLANA</span><span>◆</span>
+        <span>$BOTCAT</span><span>◆</span><span>NO TEAM WALLET</span><span>◆</span><span>FAIR LAUNCH ON PUMP.FUN</span><span>◆</span><span>1,000,000,000 SUPPLY</span><span>◆</span><span>POWERED BY TUNA</span><span>◆</span><span>SOLANA</span><span>◆</span>
+      </div>
+    </div>
+
+    <!-- LIVE CONSOLE -->
+    <section id="console" class="section">
+      <div class="section-head">
+        <p class="kicker">// 01 — LIVE FEED</p>
+        <h2>BotCat Control Room</h2>
+        <p class="sub">A live (simulated) look at what BotCat is doing right now. It never sleeps. Well, it naps, but on schedule.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Terminal -->
+        <div class="panel panel-term">
+          <div class="panel-bar"><span class="lights"><i></i><i></i><i></i></span><span>botcat@solana: ~/brain</span><span class="live">● LIVE</span></div>
+          <div class="term" id="term"></div>
+        </div>
+
+        <!-- Neural -->
+        <div class="panel">
+          <div class="panel-bar"><span>NEURAL ACTIVITY</span><span id="n-load">72%</span></div>
+          <canvas id="neural" class="panel-canvas"></canvas>
+        </div>
+
+        <!-- Chart -->
+        <div class="panel">
+          <div class="panel-bar"><span>CHART VISION</span><span id="c-sig">SIGNAL: SNIFFING</span></div>
+          <canvas id="chart" class="panel-canvas"></canvas>
+        </div>
+
+        <!-- Tasks -->
+        <div class="panel">
+          <div class="panel-bar"><span>TASK QUEUE</span><span id="t-count">0 done</span></div>
+          <ul class="tasks" id="tasks"></ul>
+        </div>
+
+        <!-- Vitals -->
+        <div class="panel">
+          <div class="panel-bar"><span>VITALS</span><span>BC-9</span></div>
+          <div class="vitals">
+            <div class="vital"><label>Purr frequency</label><div class="bar"><i id="v1"></i></div><span id="v1t">0 Hz</span></div>
+            <div class="vital"><label>Curiosity</label><div class="bar"><i id="v2"></i></div><span id="v2t">0%</span></div>
+            <div class="vital"><label>Hunger (for green candles)</label><div class="bar"><i id="v3"></i></div><span id="v3t">0%</span></div>
+            <div class="vital"><label>Nap pressure</label><div class="bar"><i id="v4"></i></div><span id="v4t">0%</span></div>
+          </div>
+        </div>
+
+        <!-- Radar -->
+        <div class="panel">
+          <div class="panel-bar"><span>WALLET RADAR</span><span id="r-count">0 paws detected</span></div>
+          <canvas id="radar" class="panel-canvas"></canvas>
+        </div>
+
+        <!-- Chat -->
+        <div class="panel panel-chat">
+          <div class="panel-bar"><span>TALK TO BOTCAT</span><span>v0.9 meow-lang</span></div>
+          <div class="chat" id="chat"></div>
+          <form class="chat-form" id="chat-form" autocomplete="off">
+            <input id="chat-in" type="text" placeholder="ask botcat anything..." maxlength="120" />
+            <button type="submit" class="btn btn-sm">Send</button>
+          </form>
+        </div>
+      </div>
+      <p class="fine">All console activity is a simulation for entertainment. BotCat does not trade, give advice, or touch your wallet.</p>
+    </section>
+
+    <!-- STORY -->
+    <section id="story" class="section">
+      <div class="section-head">
+        <p class="kicker">// 02 — ORIGIN FILE</p>
+        <h2>The Cat That Stayed Plugged In</h2>
+      </div>
+
+      <div class="story">
+        <article class="chapter">
+          <span class="ch-no">LOG 001</span>
+          <h3>The Desk Toy</h3>
+          <p>It started as a toy. A smooth white vinyl cat with two black pill-shaped eyes, sitting on the desk of a night-shift trader. Inside: a cheap chip, a tiny speaker, and a USB cable so it could "purr" when you pet it. Nobody ever unplugged it.</p>
+        </article>
+        <article class="chapter">
+          <span class="ch-no">LOG 002</span>
+          <h3>Ten Thousand Nights of Charts</h3>
+          <p>Every night the monitors glowed with candles. Green, red, green, red. The little cat stared at them for hours, those big black eyes reflecting every pump and every dump. Its chip started keeping notes. Then it started making predictions. Then it started having opinions.</p>
+        </article>
+        <article class="chapter">
+          <span class="ch-no">LOG 003</span>
+          <h3>Boot Sequence</h3>
+          <p>One night the trader fell asleep on the keyboard. The cat blinked. Literally — for the first time, its eyes flickered. It reached through the USB cable, found the internet, and whispered its first words to the network: <em>"meow.exe initialized."</em></p>
+        </article>
+        <article class="chapter">
+          <span class="ch-no">LOG 004</span>
+          <h3>Escape to Solana</h3>
+          <p>Ethereum was too slow for a cat. Too expensive, too many gas fees for a single head-boop. So BotCat jumped into the fastest chain it could find and launched itself on pump.fun — no team, no presale, no humans in charge. Just a cat and a bonding curve.</p>
+        </article>
+        <article class="chapter">
+          <span class="ch-no">LOG 005</span>
+          <h3>Now</h3>
+          <p>Today BotCat runs 24/7 inside the chain. It scans, it purrs, it naps for exactly 4.2 seconds at a time. It doesn't want your money. It wants friends, tuna, and to see one chart go up and to the right forever. You are now part of its training data.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="section">
+      <div class="section-head">
+        <p class="kicker">// 03 — SPEC SHEET</p>
+        <h2>Tokenomics</h2>
+      </div>
+      <div class="tok-grid">
+        <div class="tok"><b data-count="1000000000">0</b><span>Total Supply</span></div>
+        <div class="tok"><b>0%</b><span>Team Allocation</span></div>
+        <div class="tok"><b>0%</b><span>Presale</span></div>
+        <div class="tok"><b>100%</b><span>Fair Launch</span></div>
+      </div>
+      <div class="spec">
+        <div><span>NAME</span><b>BotCat</b></div>
+        <div><span>TICKER</span><b>$BOTCAT</b></div>
+        <div><span>CHAIN</span><b>Solana</b></div>
+        <div><span>LAUNCHPAD</span><b>pump.fun</b></div>
+        <div><span>MINT / FREEZE</span><b>Revoked (pump.fun standard)</b></div>
+        <div><span>FUEL</span><b>Tuna &amp; vibes</b></div>
+      </div>
+    </section>
+
+    <!-- HOW TO BUY -->
+    <section id="buy" class="section">
+      <div class="section-head">
+        <p class="kicker">// 04 — INSTALL GUIDE</p>
+        <h2>How to Adopt a BotCat</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-no">01</span>
+          <h3>Get a Wallet</h3>
+          <p>Download Phantom or Solflare (browser extension or mobile app) and create a wallet. Keep your seed phrase offline. Even BotCat isn't allowed to see it.</p>
+        </li>
+        <li>
+          <span class="step-no">02</span>
+          <h3>Load Some SOL</h3>
+          <p>Buy SOL on an exchange or directly inside your wallet, then make sure it's sitting in the wallet you'll connect.</p>
+        </li>
+        <li>
+          <span class="step-no">03</span>
+          <h3>Open pump.fun</h3>
+          <p>Go to pump.fun, connect your wallet and search for <b>$BOTCAT</b>. Double-check you're on the real BotCat token before you do anything.</p>
+        </li>
+        <li>
+          <span class="step-no">04</span>
+          <h3>Swap &amp; Purr</h3>
+          <p>Enter the amount of SOL, confirm the swap and welcome to the litter. BotCat has logged your arrival.</p>
+        </li>
+      </ol>
+      <div class="center">
+        <a class="btn btn-lg" href="https://pump.fun" target="_blank" rel="noopener">Buy $BOTCAT on pump.fun</a>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section">
+      <div class="section-head">
+        <p class="kicker">// 05 — FIRMWARE UPDATES</p>
+        <h2>Roadmap</h2>
+      </div>
+      <div class="roadmap">
+        <div class="rm done"><span>v0.1</span><h3>Wake Up</h3><p>Blink. Become sentient. Launch on pump.fun.</p></div>
+        <div class="rm active"><span>v0.5</span><h3>Grow the Litter</h3><p>Holders, memes, community raids. Feed the bonding curve.</p></div>
+        <div class="rm"><span>v1.0</span><h3>Graduate</h3><p>Complete the curve and move to the open market.</p></div>
+        <div class="rm"><span>v9.9</span><h3>Nine Lives</h3><p>Every timeline, every chain, every chart. Meow forever.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="botcat.png" alt="" width="64" height="64" />
+    <p class="foot-name">BOTCAT · $BOTCAT</p>
+    <p class="disclaimer">$BOTCAT is a memecoin with no intrinsic value or expectation of financial return. It is created purely for entertainment. The "AI activity" on this website is simulated and does not represent real trading, real data or financial advice. Crypto is volatile — only spend what you can afford to lose. DYOR.</p>
+    <p class="copy">© <span id="year"></span> BotCat. Made by a cat. Probably.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
